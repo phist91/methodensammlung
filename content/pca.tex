@@ -1,0 +1,90 @@
+%!TEX root = ../methoden.tex
+% Author: Phil Steinhorst, p.st@wwu.de
+\section{Hauptkomponentenanalyse (PCA)}
+\label{sec:pca}
+\begin{keywordbox}
+	\keyword{Hauptkomponentenanalyse}, \keyword{Faktorenanalyse}, \keyword{principal component analysis}, \keyword{PCA}, \keyword{explorativ}, \keyword{konfirmatorisch}, \keyword{Reduktion}, KMO, Kaiser-Meyer-Olkin, Bartlett, Sphärizität, Kaiser-Kriterium, Eigenwert, erklärte Varianz, Scree Plot
+\end{keywordbox}
+\laerdlink{https://statistics.laerd.com/premium/spss/pca/pca-in-spss.php}{PCA in SPSS}
+
+\subsection{Anwendungsfälle}
+\begin{itemize}
+	\item Reduziert gemessene Variablen auf eine kleinere Menge an \textit{künstlichen} Variablen, die für die meiste Varianz in den Messwerten verantwortlich sind
+	\item Konzeptionell unterschiedlich zur explorativen Faktorenanalyse, aber häufig gleiches Verfahren
+	\item Variablen werden geclustert, um evtl. irrelevante Variablen herauszufiltern
+	\item Zusammenfassung von Variablen, die das gleiche Konstrukt messen, zu einem \textit{component score}
+\end{itemize}
+
+\subsection{Voraussetzungen}
+\begin{enumerate}[(1)]
+	\item Mehrere Variablen mit stetiger oder ordinaler Skala
+	\begin{alertbox}
+		Auf umgekehrt kodierte Variablen achten!
+	\end{alertbox}
+	\item Lineare Beziehung zwischen den Variablen
+	\item Keine Ausreißer
+	\item Große Stichprobe: mindestens 150 Datensätze bzw. 5--10 Datensätze pro Variable
+\end{enumerate}
+Voraussetzungen (2) bis (4) werden während des Verfahren überprüft.
+
+\subsection{Durchführung in SPSS}
+\begin{enumerate}
+	\item Daten importieren, Variablen deklarieren
+	\item Menü \textit{Analyze} $\rightarrow$ \textit{Dimension Reduction} $\rightarrow$ \textit{Factor\dots}
+	\item Zu faktorisierende Variablen auswählen, Einstellungen vornehmen:
+	\begin{description}
+		\item[Descriptives:] Univariate Descriptives, Initial Solution, Coefficients, KMO and Bartlett, Reproduced, Anti-Image
+		\item[Extraction:] Methode auswählen, Correlation Matrix, Unrotated factor solution, Scree plot, Eigenvalues greater than 1
+		\begin{description}
+			\item[Principal components:] 
+			\item[Principal axis factoring:] 
+		\end{description}
+		\item[Rotation:] Methode auswählen, Rotated solution, Loading plot(s)
+		\begin{description}
+			\item[None:] 
+			\item[Varimax:]
+			\item[Direct Oblimin:] Delta 0
+		\end{description}
+		\item[Options:] Missing Values auswählen, Sorted by size, Suppress small coefficients below 0.3
+		\begin{description}
+			\item[Listwise exclusion:] Datensätze mit fehlenden Werten überall außen vor lassen (empfohlen)
+			\item[Pairwise exclusion:] Verwendet alle möglichen Datensätze (Vorsicht: Unterschiedliche Stichproben!)
+			\item[Replace with mean:] Selbsterklärend, aber meistens Quatsch
+		\end{description}
+	\end{description}
+\end{enumerate}
+
+\subsection{Voraussetzungen prüfen}
+\begin{enumerate}
+	\item \textit{Correlation Matrix:} Gibt es eine Variable, die nicht stark genug mit einer anderen korreliert?
+		\begin{alertbox}
+			Variablen mit $r < 0.3$ aus Analyse fortlassen und wiederholen, Variablen mit $r < 0.4$ im Auge behalten!
+		\end{alertbox}
+	\item \textit{Kaiser-Meyer-Olkin-Maße:} Misst Eignung der Stichprobe (Linearität) \index{Kaiser-Meyer-Olkin}\index{KMO}
+		\begin{description}
+			\item[Measure of Sampling Adequacy:] mindestens $0.6$, besser $0.8$
+			\item[Anti-Image Correlation:] mindestens $0.5$ auf Diagonale, besser $0.8$
+		\end{description}
+		\begin{alertbox}
+			Variablen mit $r < 0.5$ in der Anti-Image Correlation Matrix aus Analyse entfernen!
+			Bei Sampling Adequacy $< 0.6$ ist das Verfahren ungeeignet bzw. die Ergebnisse nicht aussagekräftig!
+		\end{alertbox}
+	\item \textit{Bartlett's Test of Sphericity:} Test gegen Nullhypothese: Korrelationsmatrix ist Einheitsmatrix (= keine Korrelation zwischen einzelnen Variablen $\Rightarrow$ keine Faktorisierung möglich).
+	Statistische Signifikanz ($p < 0.05$) wünschenswert. \index{Bartlett's Test of Sphericity} \index{Sphärizität}
+		\begin{alertbox}
+			Bei $p > 0.05$ ist das Verfahren ungeeignet!
+			Jedoch: Verfahren ist empfindlich gegenüber Abweichungen von der mehrdimensionalen Normalverteilung.
+		\end{alertbox}
+\end{enumerate}
+
+\subsection{Kriterien zur Faktorenauswahl}
+\begin{itemize}
+	\item \textit{Kaiser-Kriterium:} Variablen mit Eigenwert $\geq 1$ \index{Kaiser-Kriterium}\index{Eigenwert}
+	\item \textit{Erklärte Varianz:} individuell mindestens $5$--$10\%$, kumuliert mindestens $60$--$70\%$.
+	\item \textit{Wendepunkt im Scree Plot} \index{Scree Plot}
+	\item \textit{Simple Structure} in rotierter Komponentenmatrix:
+		Jede Variable mit starker Auswirkung auf nur eine Komponente; jede Komponente mit starker Auswirkung auf mindestens drei Variablen.
+\end{itemize}
+Nach Festlegung der Faktoren: Rerun mit fester Faktorenzahl; Güte überprüfen
+
+\todo[inline]{Gütekriterien der konfirmatorischen Faktorenanalyse: CFI, Tucker-Lewis, RMSEA, SRMR, GFI/AGFI}

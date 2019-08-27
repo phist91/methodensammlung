@@ -5,8 +5,9 @@
 	twoside,
 	fontsize=9pt,
 	BCOR=8mm,
-	DIV=calc,
-	bibliography=totoc
+	DIV=17,
+	bibliography=totoc,
+	index=totoc
 ]{scrreprt}
 
 
@@ -32,7 +33,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{setspace}
 \setstretch{1.15}
-\recalctypearea
+%\recalctypearea
 \usepackage[babel=true,final,tracking=smallcaps]{microtype}
 \DisableLigatures{encoding = T1, family = tt* }
 \usepackage{ellipsis}
@@ -76,7 +77,55 @@
 \usetikzlibrary{shadows}
 \usetikzlibrary{calc}
 \tikzset{>=Latex}						% Standard-Pfeilspitze
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% mdframed
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[tikz]{mdframed}
+\newmdenv[%
+	backgroundcolor = gray!20,
+	linewidth=0pt,
+	skipabove = 0.5cm,
+	skipbelow = 0.5cm
+	]{notes}
+\newmdenv[%
+	leftmargin=2cm,
+	rightmargin=2cm,
+	linewidth=1pt,
+	roundcorner=10pt,
+	font=\small,
+	linecolor=blackberry,
+	shadow=true,
+	shadowcolor=black!25,
+	shadowsize=6pt,
+	frametitle={Keywords:},
+	frametitlefont=\sffamily\bfseries,
+	]{keywordbox}
+\newmdenv[%
+	leftmargin=2cm,
+	rightmargin=2cm,
+	linewidth=2pt,
+	font=\small,
+	linecolor=red,
+	shadow=true,
+	shadowcolor=black!25,
+	shadowsize=6pt,
+	]{alertbox}
+\newmdenv[%
+	leftmargin=2cm,
+	rightmargin=2cm,
+	linewidth=1pt,
+	roundcorner=10pt,
+	font=\small,
+	linecolor=fbblau,
+	shadow=true,
+	shadowcolor=black!25,
+	shadowsize=6pt,
+	]{laerdbox}
+\newcommand{\laerdlink}[2]{\begin{laerdbox}
+	{\sffamily\bfseries Leard-Link:} \href{#1}{#2}
+\end{laerdbox}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -108,7 +157,7 @@
 % Indexerstellung
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{makeidx}
-
+\newcommand{\keyword}[1]{#1\index{#1}}
 \makeindex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

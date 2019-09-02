@@ -1,0 +1,8 @@
+build:
+  tags:
+    - latex
+  script:
+    - latexmk -pdf -gg
+  artifacts:
+    paths:
+      - methoden.pdf
